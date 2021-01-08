@@ -83,11 +83,11 @@ Símbolos */
 
 /*******************
 Esconder Objetos */
-/*
+
 .hide {
     display: none !important;
 }
-*/
+
 
 /*****************
 Placar */ 
@@ -132,5 +132,4 @@ Mensagem de vitória */
     background-color: #000;
     color: #fff;
     padding: 1.25em;
-    display: none;
 }
