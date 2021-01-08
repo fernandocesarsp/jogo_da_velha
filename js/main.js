@@ -29,7 +29,7 @@ for(let i = 0; i < boxes.length; i++) {
         player1++;
 
         // jogada ia
-        if(secondPlayer == 'ai-player') {
+        if(secondPlayer == 'ia-player') {
 
           computerPlay();
           player2++;
@@ -47,6 +47,29 @@ for(let i = 0; i < boxes.length; i++) {
   });  
 
 }
+
+// Evento para saber se é 2 players ou IA
+for( let i = 0; i < buttons.length; i++) {
+
+  buttons[i].addEventListener("click", function() {
+    secondPlayer = this.getAttribute("id");
+
+    for(let j = 0; j < buttons.length; j++) {
+      buttons[j].style.display = 'none';
+
+    }
+
+    setTimeout(function() {
+
+      let container = document.querySelector("#container");
+      container.classList.remove("hide");
+
+    }, 500);
+
+  });
+
+}
+
 
 // ve quem está jogando
 function checkEl(player1, player2) {
@@ -244,5 +267,35 @@ let boxesToRemove = document.querySelectorAll(".box div");
 for(let i = 0; i < boxesToRemove.length; i++) {
     boxesToRemove[i].parentNode.removeChild(boxesToRemove[i]);
 }
+
+}
+
+// Executar a lógica da jogada do CPU
+function computerPlay() {
+
+  let cloneO = o.cloneNode(true);
+  counter = 0;
+  filled = 0;
+
+  for(let i =0; i < boxes.length; i++) {
+
+    let randomNumber = Math.floor(Math.random() * 5);
+
+    // Só vai preencher se estiver vazio o filho
+    if(boxes[i].childNodes[0] == undefined) {
+      if(randomNumber <= 1) {
+        boxes[i].appendChild(cloneO);
+        counter++;
+        break;
+      }
+    // Vai checar quantas estão preenchidas 
+    } else {
+      filled++;
+    }
+  }
+
+  if(counter == 0 && filled < 9) {
+    computerPlay();
+  }
 
 }
